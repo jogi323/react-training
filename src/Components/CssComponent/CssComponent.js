@@ -10,6 +10,7 @@ export default class CssComponent extends Component {
         return (
             <div>
                 <h1 style={h1Styles}>Hello World !!!</h1>
+                <h2>Testing git</h2>
                 <p className="content">This is from a paragraph tag and using external CSS </p>
             </div>
         )
