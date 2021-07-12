@@ -8,22 +8,24 @@ import RenderElements from "./Components/RenderElements";
 import ClassBasedComponent from "./Components/ReactComponent";
 import FunctionalComponent from "./Components/ReactFunComponent";
 import CssComponent from "./Components/CssComponent/CssComponent";
+import StateComponent from "./Components/StateComponent";
+import LifeCyclesComponents from "./Components/LifeCyclesComponents";
 
 function App() {
-  const [name, setName] = useState("Jogi");
+  const [name, setName] = useState("Angular");
   const [time, updateTime] = useState(new Date().toLocaleTimeString())
   const handleChange = () => {
-    setName("test");
+    setName("React");
   }
   const element = <h1>Heading, {name}</h1>;
-  useEffect(() => {
-    const interval = setInterval(() => {
-      updateTime(new Date().toLocaleTimeString())
-    }, 1000);
-    return () => {
-      clearInterval(interval)
-    }
-  });
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     updateTime(new Date().toLocaleTimeString())
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(interval)
+  //   }
+  // });
   return (
     <div className="App">
       {/* <header className="App-header">
@@ -36,7 +38,7 @@ function App() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
-        > 
+        >  
           <button onClick={handleChange}>change name tttyfy</button>
           {name}
         </a> 
@@ -45,12 +47,15 @@ function App() {
       {/* <JsxComonent /> */}
       {/* <RenderElements /> */}
       {/* the time is {time} */}
-
-      <JsxComonent />
+      <button onClick={handleChange}>change name tttyfy</button>
+          {name}
+      {/* <JsxComonent />
       <RenderElements />
-      <ClassBasedComponent />
-      <FunctionalComponent />
-      <CssComponent />
+      <ClassBasedComponent name={name}/>
+      <FunctionalComponent /> -  <CssComponent />
+      <CssComponent /> */}
+      <StateComponent appName={name}/>
+      <LifeCyclesComponents  />
     </div>
   );
 }
