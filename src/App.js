@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import React , {useState, useEffect} from "react";
 
 import JsxComonent  from "./Components/JsxComonent";
@@ -10,6 +10,9 @@ import FunctionalComponent from "./Components/ReactFunComponent";
 import CssComponent from "./Components/CssComponent/CssComponent";
 import StateComponent from "./Components/StateComponent";
 import LifeCyclesComponents from "./Components/LifeCyclesComponents";
+import ConditionalRenderingComponent from "./Components/conditionalRenderingComponent";
+import ListComponent from "./Components/ListComponent";
+import FormsComponent from "./Components/FormsComponent";
 
 function App() {
   const [name, setName] = useState("Angular");
@@ -47,15 +50,23 @@ function App() {
       {/* <JsxComonent /> */}
       {/* <RenderElements /> */}
       {/* the time is {time} */}
-      <button onClick={handleChange}>change name tttyfy</button>
-          {name}
+      {/* <button onClick={handleChange} className="btn btn-primary">change name tttyfy</button>
+          {name} */}
       {/* <JsxComonent />
       <RenderElements />
       <ClassBasedComponent name={name}/>
       <FunctionalComponent /> -  <CssComponent />
       <CssComponent /> */}
-      <StateComponent appName={name}/>
-      <LifeCyclesComponents  />
+      {/* <StateComponent appName={name}/> */}
+      {/* <LifeCyclesComponents  /> */}
+      {/* <ConditionalRenderingComponent loggedIn={false} />
+      <ListComponent />
+      <ul>
+        <li><a>abc</a></li>
+        <li><a>abcd</a></li>
+        <li><a>abcdf</a></li>
+      </ul> */}
+      <FormsComponent />
     </div>
   );
 }
