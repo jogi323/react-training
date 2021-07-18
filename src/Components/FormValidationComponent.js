@@ -9,7 +9,8 @@ export default class FormValidationsComponent extends Component {
             password: "",
             rememberMe: false,
             errorMessages: {},
-            cpassword: ""
+            cpassword: "",
+            isOpen: false
         }
         this.constraints  = {
             username: {
@@ -92,9 +93,11 @@ export default class FormValidationsComponent extends Component {
         console.log(this.state);
        this.props.onFormSubmit({username: this.state.username, password: this.state.password});
     }
+    toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
     render() {
         const { username, password,  rememberMe, errorMessages, isFormInvalid, cpassword } = this.state;
         // console.log(errorMessages);
+        const menuClass = `dropdown-menu${this.state.isOpen ? " show" : ""}`;
         return (
             <div className="container col-6">
             <form>
@@ -118,6 +121,26 @@ export default class FormValidationsComponent extends Component {
                     <input name="rememberMe" type="checkbox" className="form-check-input" id="exampleCheck1" checked={rememberMe} onChange={this.handleInputChange}/>
                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                 </div>
+                <div className="dropdown">
+  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#navbarSupportedContent" onClick={this.toggleOpen}>
+    Dropdown button
+  </button>
+  <div className={menuClass} aria-labelledby="dropdownMenuButton" id="navbarSupportedContent">
+    <a className="dropdown-item" href="#">Action</a>
+    <a className="dropdown-item" href="#">Another action</a>
+    <a className="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+<div className="dropdown">
+  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown
+  </button>
+  <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button className="dropdown-item" type="button">Action</button>
+    <button className="dropdown-item" type="button">Another action</button>
+    <button className="dropdown-item" type="button">Something else here</button>
+  </div>
+</div>
                 <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
             </form>
             </div>

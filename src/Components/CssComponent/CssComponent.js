@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import "./CssComponent.css";
 
 export default class CssComponent extends Component {
-    
+    componentDidMount = () => {
+        fetch('./Products.json')
+        .then(response => response.json())
+        .then(data => console.log(data));
+    }
     render() {
         const h1Styles = {
             color: "red", backgroundColor: "blue"
         }
+        
         return (
             <div>
                 <h1 style={h1Styles}>Hello World !!!</h1>

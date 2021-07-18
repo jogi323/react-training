@@ -9,6 +9,8 @@ export default class FormsComponent extends Component {
             rememberMe: false,
             errorMessages: {}
         }
+        // https://api.npms.io/v2/search?q=react
+        // https://reqres.in/api/posts
     }
 
     validateInputs = (key, value) => {

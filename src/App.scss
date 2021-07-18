@@ -47,3 +47,10 @@ ul {
     }
   }
 }
+.show>.dropdown-menu {
+  display: block;
+  position: absolute;
+}
+.out-of-stock {
+  color: red;
+}

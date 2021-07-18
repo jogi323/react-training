@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.scss';
 import React , {useState, useEffect} from "react";
+import axios from "axios";
 
 import JsxComonent  from "./Components/JsxComonent";
 
@@ -15,6 +16,7 @@ import ListComponent from "./Components/ListComponent";
 // import FormsComponent from "./Components/FormsComponent";
 import FormValidationsComponent from "./Components/FormValidationComponent";
 import FragmentComponent from "./Components/FragmentComponent";
+import ProductsListComponents from "./Components/Products/ProductsListComponents.js";
 
 function App() {
   const [name, setName] = useState("Angular");
@@ -42,6 +44,20 @@ function App() {
   const onSubmit = (data, tech) => {
     console.log("data from chldren component", data, tech);
   }
+  useEffect(() => {
+    axios.get("https://api.npms.io/v2/search?q=react").then((res) => {
+      console.log(res)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    axios.post("https://reqres.in/api/posts", {title: "React", id: 1}).then((res)=> {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  })
   return (
     <div className="App">
       {/* <header className="App-header">
@@ -70,6 +86,7 @@ function App() {
       <ClassBasedComponent name={name}/>
       <FunctionalComponent /> -  <CssComponent />
       <CssComponent /> */}
+      {/* <CssComponent /> */}
       {/* <StateComponent appName={name}/> */}
       {/* <LifeCyclesComponents  /> */}
       {/* <ConditionalRenderingComponent loggedIn={false} />
@@ -81,8 +98,9 @@ function App() {
       </ul> */}   
       {/* <FormsComponent /> */}
      
-      <FormValidationsComponent name="abc" onFormSubmit={(data)=>onSubmit(data, 1)} />
-      <FragmentComponent />
+      {/* <FormValidationsComponent name="abc" onFormSubmit={(data)=>onSubmit(data, 1)} /> */}
+      {/* <FragmentComponent /> */}
+      <ProductsListComponents />
     </div>
   );
 }
