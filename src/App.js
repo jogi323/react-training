@@ -17,6 +17,8 @@ import ListComponent from "./Components/ListComponent";
 import FormValidationsComponent from "./Components/FormValidationComponent";
 import FragmentComponent from "./Components/FragmentComponent";
 import ProductsListComponents from "./Components/Products/ProductsListComponents.js";
+import ProductsContext from "./Components/ProductsContext";
+
 import HooksComponent from "./Components/Hooks/HooksComponent";
 function App() {
   const [name, setName] = useState("Angular");
@@ -33,7 +35,7 @@ function App() {
     {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
     {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
 ];
-const ProductsContext = React.createContext(PRODUCTS);
+// const ProductsContext = React.createContext(PRODUCTS);
   const element = <h1>Heading, {name}</h1>;
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -100,14 +102,14 @@ const ProductsContext = React.createContext(PRODUCTS);
       </ul> */}   
       {/* <FormsComponent /> */}
      
-      {/* <FormValidationsComponent name="abc" onFormSubmit={(data)=>onSubmit(data, 1)} /> */}
+      <FormValidationsComponent name="abc" onFormSubmit={(data)=>onSubmit(data, 1)} />
       {/* <FragmentComponent /> */}
       {/* <button onClick={handleChange}>change name tttyfy</button>
       <FunctionalComponent value={name}/> */}
       {/* <ProductsListComponents /> */}
-      <ProductsContext.Provider value={PRODUCTS}>
+      {/* <ProductsContext.Provider value={PRODUCTS}>
         <HooksComponent />
-      </ProductsContext.Provider>
+      </ProductsContext.Provider> */}
       
     </div>
   );

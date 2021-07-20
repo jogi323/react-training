@@ -1,4 +1,5 @@
 import React, {useContext, useReducer, useRef} from 'react';
+import ProductsContext from "../ProductsContext";
 
 const initialState = {name: "", password:"", count: 0};
 
@@ -13,12 +14,12 @@ const reducer = (state, action) => {
             return {...state,[action.key]: action.value}
         default:
             console.log("error");
-    }
+    } 
 }
 
 export default function HookChildComponent(props) {
-    // const data = useContext("");
-    // console.log(data);
+    const data = useContext(ProductsContext);
+    console.log(data);
     const inputRef = useRef(null);
     const [state, dispatch] = useReducer(reducer, initialState);
     const setFocus = () => {
