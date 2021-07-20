@@ -17,12 +17,13 @@ import ListComponent from "./Components/ListComponent";
 import FormValidationsComponent from "./Components/FormValidationComponent";
 import FragmentComponent from "./Components/FragmentComponent";
 import ProductsListComponents from "./Components/Products/ProductsListComponents.js";
-
+import HooksComponent from "./Components/Hooks/HooksComponent";
 function App() {
   const [name, setName] = useState("Angular");
   const [time, updateTime] = useState(new Date().toLocaleTimeString())
   const handleChange = () => {
-    setName("React");
+    setName("Angular");
+    console.log(name)
   }
   const PRODUCTS = [
     {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
@@ -32,6 +33,7 @@ function App() {
     {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
     {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
 ];
+const ProductsContext = React.createContext(PRODUCTS);
   const element = <h1>Heading, {name}</h1>;
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -44,20 +46,20 @@ function App() {
   const onSubmit = (data, tech) => {
     console.log("data from chldren component", data, tech);
   }
-  useEffect(() => {
-    axios.get("https://api.npms.io/v2/search?q=react").then((res) => {
-      console.log(res)
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-    axios.post("https://reqres.in/api/posts", {title: "React", id: 1}).then((res)=> {
-      console.log(res);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  })
+  // useEffect(() => {
+  //   axios.get("https://api.npms.io/v2/search?q=react").then((res) => {
+  //     console.log(res)
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  //   axios.post("https://reqres.in/api/posts", {title: "React", id: 1}).then((res)=> {
+  //     console.log(res);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  // })
   return (
     <div className="App">
       {/* <header className="App-header">
@@ -100,7 +102,13 @@ function App() {
      
       {/* <FormValidationsComponent name="abc" onFormSubmit={(data)=>onSubmit(data, 1)} /> */}
       {/* <FragmentComponent /> */}
-      <ProductsListComponents />
+      {/* <button onClick={handleChange}>change name tttyfy</button>
+      <FunctionalComponent value={name}/> */}
+      {/* <ProductsListComponents /> */}
+      <ProductsContext.Provider value={PRODUCTS}>
+        <HooksComponent />
+      </ProductsContext.Provider>
+      
     </div>
   );
 }
