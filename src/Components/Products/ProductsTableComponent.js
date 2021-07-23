@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ProductsContext from "../ProductsContext";
 
 function ProductRow (props) {
     return (
@@ -28,6 +29,14 @@ export default class ProductsTableComponent extends Component {
         })
         return (
             <div>
+                   <ProductsContext.Consumer>
+                        {
+                            (products) => {
+                                console.log(products);
+                                return <h1>Testing123</h1>
+                            }
+                        }
+                    </ProductsContext.Consumer> 
                 Products Table:
                 <table className="table">
                     <thead>

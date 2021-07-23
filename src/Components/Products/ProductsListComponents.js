@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ProductsTableComponent  from "./ProductsTableComponent";
 import SearchProductsComponent from "./SearchProductsComponent";
+import ProductsContext from "../ProductsContext";
 
 export default class ProductsListComponents extends Component {
     constructor(props) {
@@ -21,18 +22,18 @@ export default class ProductsListComponents extends Component {
 
     componentDidMount () {
         //get data GET
-        fetch("./JSON/products.json")
-            .then((res) => res.json())
-            .then((data => console.log(data)));
-        // Post the data
-        const payload = {
-            method: "POST",
-            header: {"Content-type": "application/json"},
-            data: JSON.stringify({title: "React Post request example"})
-        }
-        fetch("https://reqres.in/api/post", payload)
-            .then((res) => res.json())
-            .then((data => console.log(data)));
+        // fetch("./JSON/products.json")
+        //     .then((res) => res.json())
+        //     .then((data => console.log(data)));
+        // // Post the data
+        // const payload = {
+        //     method: "POST",
+        //     header: {"Content-type": "application/json"},
+        //     data: JSON.stringify({title: "React Post request example"})
+        // }
+        // fetch("https://reqres.in/api/post", payload)
+        //     .then((res) => res.json())
+        //     .then((data => console.log(data)));
     }
     
     inptChanged = (key, value) => {
@@ -55,7 +56,14 @@ export default class ProductsListComponents extends Component {
         return (
             <Fragment>
                 <div className="container col-6">
-
+                <ProductsContext.Consumer>
+                {
+                            (products) => {
+                                console.log(products);
+                                return <h1>Testing123</h1>
+                            }
+                        }
+                    </ProductsContext.Consumer> 
                 Products List
 
                 <SearchProductsComponent searchTextChanged={this.inptChanged} on/>

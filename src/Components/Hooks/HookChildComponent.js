@@ -35,6 +35,7 @@ export default function HookChildComponent(props) {
             <button onClick={()=>dispatch({type: "decrement"})}>Decrement</button>
             The count is {state.count}
             <button onClick={setFocus}>Set focus</button>
+            <a></a>
         </div>
     )
 }

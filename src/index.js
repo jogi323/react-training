@@ -7,11 +7,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Popper from 'popper.js'
+import Popper from 'popper.js';
+import ErrorBoundaryComponent from "./Components/ErrorBoundaryComponent";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ErrorBoundaryComponent>
+      <App />
+    </ErrorBoundaryComponent>
   </React.StrictMode>,
   document.getElementById('root')
 );

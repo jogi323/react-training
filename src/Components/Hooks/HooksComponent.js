@@ -4,11 +4,16 @@ import HookChildComponent from "./HookChildComponent";
 export default function HooksComponent(props) {
   const [ name, setname ] = useState("Angular");
   const [ count, setcount ] = useState(0);
+  const [ data, setdata ] = useState([]);
  // ComponentDidmount, componentDidUpdate & ComponentWillUnmount
 
   useEffect(() => {
-    // console.log(props)
-  },[props]);
+    // console.log(props);
+    //get data GET
+        fetch("./JSON/products.json")
+            .then((res) => res.json())
+            .then((data => setdata(data)));
+  },[]);
 
   useEffect(() => {
     sayHello();

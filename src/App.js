@@ -18,6 +18,8 @@ import FormValidationsComponent from "./Components/FormValidationComponent";
 import FragmentComponent from "./Components/FragmentComponent";
 import ProductsListComponents from "./Components/Products/ProductsListComponents.js";
 import ProductsContext from "./Components/ProductsContext";
+import PropTypeComponent from "./Components/PropTypeComponent";
+import UncontrolledComponent from "./Components/uncontrolledComponent";
 
 import HooksComponent from "./Components/Hooks/HooksComponent";
 function App() {
@@ -102,15 +104,18 @@ function App() {
       </ul> */}   
       {/* <FormsComponent /> */}
      
-      <FormValidationsComponent name="abc" onFormSubmit={(data)=>onSubmit(data, 1)} />
+      {/* <FormValidationsComponent name="abc" onFormSubmit={(data)=>onSubmit(data, 1)} /> */}
       {/* <FragmentComponent /> */}
       {/* <button onClick={handleChange}>change name tttyfy</button>
       <FunctionalComponent value={name}/> */}
-      {/* <ProductsListComponents /> */}
       {/* <ProductsContext.Provider value={PRODUCTS}>
+        <ProductsListComponents />
         <HooksComponent />
       </ProductsContext.Provider> */}
-      
+      <PropTypeComponent data={{name: "React"}} name="test" handleChange={handleChange} products={PRODUCTS} render={()=> {
+        return (<div>I'm coming from render props</div>)
+      }}/>
+      <UncontrolledComponent />
     </div>
   );
 }
