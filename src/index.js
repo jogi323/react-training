@@ -10,11 +10,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Popper from 'popper.js';
 import ErrorBoundaryComponent from "./Components/ErrorBoundaryComponent";
 
+import { BrowserRouter } from "react-router-dom";
+
 ReactDOM.render(
   <React.StrictMode>
-    <ErrorBoundaryComponent>
-      <App />
-    </ErrorBoundaryComponent>
+    <BrowserRouter>
+      <ErrorBoundaryComponent>
+        <App />
+      </ErrorBoundaryComponent>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

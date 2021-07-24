@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
-export default class FormsComponent extends Component {
+class FormsComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -68,6 +69,7 @@ export default class FormsComponent extends Component {
         // } else {
         //     this.setState({isFormInvalid: true});
         // }
+        this.props.history.push("/products");
     }
     render() {
         const { username, password,  rememberMe, errorMessages, isFormInvalid } = this.state;
@@ -95,3 +97,4 @@ export default class FormsComponent extends Component {
         )
     }
 }
+export default withRouter(FormsComponent);
