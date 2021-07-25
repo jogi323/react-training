@@ -54,3 +54,18 @@ ul {
 .out-of-stock {
   color: red;
 }
+.nav-item  {
+  padding: 5px;
+}
+.todo-list {
+  padding: 0px 100px;
+}
+.todo-content {
+  max-height: 200px;
+  min-height: 200px;
+  .todo-buttons {
+    .btn {
+      margin: 15px;
+    }
+  }
+}

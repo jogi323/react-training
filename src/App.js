@@ -35,6 +35,7 @@ const FormValidationsComponent = lazy(()=> import("./Components/FormValidationCo
 // import ProductsListComponents from "./Components/Products/ProductsListComponents.js";
 
 const ProductsListComponents = lazy(()=> import("./Components/Products/ProductsListComponents"));
+const TodoComponent = lazy(()=> import("./Components/Todo/TodoComponent"));
 
 
 function App() {
@@ -60,23 +61,28 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand"><Link to="/">Navbar</Link></a>
+        <span className="navbar-brand"><Link to="/">Navbar</Link></span>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link"><Link to="/"> Home </Link><span className="sr-only">(current)</span></a>
+              {/* <a className="nav-link"> */}
+                <Link to="/"> Home </Link>
+                {/* <span className="sr-only">(current)</span></a> */}
             </li>
             <li className="nav-item">
-              <a className="nav-link"><Link to="/products">Products</Link></a>
+                <Link to="/products">Products</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link"><Link to="/hooks">Hooks</Link></a>
+              <Link to="/hooks">Hooks</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link"><Link to="/dashboard">Dash board</Link></a>
+              <Link to="/dashboard">Dash board</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/todo">To Do List</Link>
             </li>
           </ul>
         </div>
@@ -88,6 +94,7 @@ function App() {
           <Route path="/hooks" component={HooksComponent} />
           <Route path="/products/:id" component={FormsComponent}/>
           <Route path="/dashboard"component={DashboardComponent}/>
+          <Route path="/todo"component={TodoComponent}/>
           <Route path="*" render={()=>{return <h1>No matched route</h1>}}/>
         </Switch>
       </Suspense>
