@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import validate from "validate.js";
 
-export default class FormValidationsComponent extends Component {
+import { withTranslation } from 'react-i18next';
+
+class FormValidationsComponent extends Component {
   constructor(props) {
     super(props);
+    this.trans = props.t;
     this.state = {
       username: "",
       password: "",
       rememberMe: false,
       errorMessages: {},
       cpassword: "",
-      isOpen: false
+      isOpen: false,
+      Count: props.Counter.Count
     }
     this.constraints = {
       username: {
         presence: {
-          message: "Username cannot be blank"
+          message: this.trans("usernameErrorMsg")
         },
         email: {
           message: "Please enter valid email."
@@ -95,7 +99,8 @@ export default class FormValidationsComponent extends Component {
   }
   toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
   render() {
-    const { username, password, rememberMe, errorMessages, isFormInvalid, cpassword, number } = this.state;
+    const { username, password, rememberMe, errorMessages, isFormInvalid, cpassword, number, Count } = this.state;
+    // const { t } = this.props;
     console.log(number);
     const menuClass = `dropdown-menu${this.state.isOpen ? " show" : ""}`;
     return (
@@ -103,8 +108,8 @@ export default class FormValidationsComponent extends Component {
         <form>
           {isFormInvalid && <small id="emailHelp" className="form-text text-muted">Invalid username or Password</small>}
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Email address</label>
-            <input name="username" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={username} onChange={this.handleInputChange} />
+            <label htmlFor="exampleInputEmail1">{this.trans("email")}</label>
+            <input name="username" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={this.trans("enterEmail")} value={username} onChange={this.handleInputChange} />
             {errorMessages.username && <small id="emailHelp" className="form-text text-muted">{errorMessages.username}</small>}
           </div>
           <div className="form-group">
@@ -138,3 +143,4 @@ export default class FormValidationsComponent extends Component {
     )
   }
 }
+export default withTranslation()(FormValidationsComponent);

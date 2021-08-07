@@ -27,8 +27,8 @@ export default function TodoComponent() {
         }
     }
 
-    const onSearchTextChange = (e) => {
-        setSearchText(e.target.value);
+    const onSearchTextChange = (value) => {
+        setSearchText(value);
     }
 
     const onDeleteTodo = (index) => {

@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { Switch, Route } from "react-router-dom";
 import { useLocation, useHistory, useRouteMatch } from 'react-router';
 import UserDetailsComponent from "./UserDetailsComponent";
 import FunctionalComponent from "../ReactFunComponent";
 
-export default function DashboardComponent() {
+import { connect } from "react-redux";
+
+function DashboardComponent(props) {
     const history = useHistory();
     let { path, url } = useRouteMatch();
     return (
         <div className="container">
-            DashBoard Component
+            DashBoard Component {props.Counter.Count} --- 
 
             <p onClick={() => history.push("/dashboard/userDetails")}>Jogi</p>
             <Switch>
@@ -19,3 +21,10 @@ export default function DashboardComponent() {
         </div>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        Counter: state.Counter
+    }
+}
+export default connect(mapStateToProps)(DashboardComponent);

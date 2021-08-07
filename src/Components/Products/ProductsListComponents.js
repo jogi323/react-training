@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
+import axios from "axios";
+
 import ProductsTableComponent  from "./ProductsTableComponent";
 import SearchProductsComponent from "./SearchProductsComponent";
+
 import ProductsContext from "../ProductsContext";
 
 export default class ProductsListComponents extends Component {
@@ -21,10 +24,14 @@ export default class ProductsListComponents extends Component {
     }
 
     componentDidMount () {
+        const url = 'https://randomuser.me/api/?results=100';
+        axios.get(url).then((res) => {
+            console.log(res)
+        });
         //get data GET
-        // fetch("./JSON/products.json")
-        //     .then((res) => res.json())
-        //     .then((data => console.log(data)));
+        // axios.get("./JSON/products.json")
+        //     .then((res) => console.log(res), (err) => {console.log(err)})
+            
         // // Post the data
         // const payload = {
         //     method: "POST",

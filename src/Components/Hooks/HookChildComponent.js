@@ -1,5 +1,8 @@
-import React, {useContext, useReducer, useRef} from 'react';
+import React, {useContext, useReducer, useRef, useState, useEffect} from 'react';
+import { connect } from "react-redux";
+
 import ProductsContext from "../ProductsContext";
+import { CounterIncrement, CounterDecrement } from './../../Actions/CounterActions';
 
 const initialState = {name: "", password:"", count: 0};
 
@@ -17,7 +20,7 @@ const reducer = (state, action) => {
     } 
 }
 
-export default function HookChildComponent(props) {
+function HookChildComponent(props) {
     const data = useContext(ProductsContext);
     console.log(data);
     const inputRef = useRef(null);
@@ -27,15 +30,44 @@ export default function HookChildComponent(props) {
         inputRef.current.focus();
         inputRef.current.value="test";
     }
+    const [Counter, setCounter] = useState(props.Counter.Count)
+
+    const incrementCount = () => {
+        props.CounterIncrement("jogi");
+    }
+    const decrementCount = () => {
+        props.CounterDecrement("jogi");
+    }
+    console.log(props);
+    useEffect(()=>{
+        setCounter(props.Counter.Count);
+    }, [props.Counter.Count])
     return (
         <div>
             <input type="text" name="name" value={state.name} onChange={(e) => dispatch({type: "inputChange", key: e.target.name, value: e.target.value})} ref={inputRef}/>
             <input type="password" name="password" value={state.password} onChange={(e) => dispatch({type: "inputChange", key: e.target.name, value: e.target.value})}/>
-            <button onClick={()=>dispatch({type: "increment"})}>increment</button>
-            <button onClick={()=>dispatch({type: "decrement"})}>Decrement</button>
-            The count is {state.count}
-            <button onClick={setFocus}>Set focus</button>
+            {/* <button onClick={()=>dispatch({type: "increment"})}>increment</button>
+            <button onClick={()=>dispatch({type: "decrement"})}>Decrement</button> */}
+            The count is {props.Counter.Count} --- State value - {Counter}
+            <button onClick={incrementCount}>Increement</button>
+            <button onClick={decrementCount}>Decrement</button>
             <a></a>
         </div>
     )
 }
+
+const mapStateToProp = (state) => {
+    return {
+        Counter: state.Counter
+    }
+}
+
+const mapDispatchStateToProps = (dispatch) => {
+    return {
+        CounterIncrement: (data) => dispatch(CounterIncrement(data)),
+        CounterDecrement: (data) => dispatch(CounterDecrement(data)),
+        // updateUserDetails: (data) => dispatch(updateUserDetails(data))
+    }
+}
+
+export default connect(mapStateToProp, mapDispatchStateToProps)(HookChildComponent);

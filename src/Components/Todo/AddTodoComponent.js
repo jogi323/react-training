@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 
 export default function AddTodoComponent(props) {
-    console.log(props)
+    // console.log(props)
     const [title, setTitle ] = useState("");
     const [desc, setDesc ] = useState("");
 
