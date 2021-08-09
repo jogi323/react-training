@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import axios from "axios";
+import { connect } from "react-redux";
 
 import ProductsTableComponent  from "./ProductsTableComponent";
 import SearchProductsComponent from "./SearchProductsComponent";
 
 import ProductsContext from "../ProductsContext";
+import { getUserData } from "../../Actions/UserDataAction";
 
-export default class ProductsListComponents extends Component {
+class ProductsListComponents extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,15 +21,27 @@ export default class ProductsListComponents extends Component {
                 {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
             ],
             searchText: "",
-            inStockOnly: false
+            inStockOnly: false,
+            userData: props.userData.data
+        }
+    }
+
+    static getDerivedStateFromProps = (nextProps, state) => {
+        // console.log(nextProps);
+        if (state.userData !== nextProps.userData) {
+            // console.log(nextProps.userData)
+            return {
+                userData: nextProps.userData.data
+            }
         }
     }
 
     componentDidMount () {
-        const url = 'https://randomuser.me/api/?results=100';
-        axios.get(url).then((res) => {
-            console.log(res)
-        });
+        this.props.getUserData();
+        // const url = 'https://randomuser.me/api/?results=100';
+        // axios.get(url).then((res) => {
+        //     console.log(res)
+        // });
         //get data GET
         // axios.get("./JSON/products.json")
         //     .then((res) => console.log(res), (err) => {console.log(err)})
@@ -59,7 +73,8 @@ export default class ProductsListComponents extends Component {
         // })
     }
     render() {
-        const { productsLit, searchText, inStockOnly } = this.state;
+        const { productsLit, searchText, inStockOnly, userData } = this.state;
+        // console.log(userData)
         return (
             <Fragment>
                 <div className="container col-6">
@@ -80,3 +95,16 @@ export default class ProductsListComponents extends Component {
         )
     }
 }
+
+const mapStateToProp = (state) => {
+    return {
+        userData: state.UserData
+    }
+}
+
+const mapDispatchStateToProp = (dispatch) => {
+    return {
+        getUserData: () => dispatch(getUserData()),
+    }
+}
+export default connect(mapStateToProp, mapDispatchStateToProp)(ProductsListComponents);
