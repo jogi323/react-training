@@ -1,14 +1,15 @@
+import { COUNT_INCREMENT, COUNT_DECREMENT } from "../Constants/Constants";
+
 export const CounterIncrement = (data) => (dispath) => {
-  console.log(data);
   dispath({
-    type: "increment",
+    type: COUNT_INCREMENT,
     data: {incrementedBy: data}
   })
 }
 
 export const CounterDecrement = (data) => (dispath) => {
   dispath({
-    type: "decrement",
+    type: COUNT_DECREMENT,
     data: {decrementedBy: "Jogi"}
   })
 }

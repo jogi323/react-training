@@ -13,8 +13,7 @@ class FormValidationsComponent extends Component {
       rememberMe: false,
       errorMessages: {},
       cpassword: "",
-      isOpen: false,
-      Count: props.Counter.Count
+      isOpen: false
     }
     this.constraints = {
       username: {

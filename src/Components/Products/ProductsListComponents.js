@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import axios from "axios";
+import { connect } from 'react-redux';
 
 import ProductsTableComponent  from "./ProductsTableComponent";
 import SearchProductsComponent from "./SearchProductsComponent";
-
+import { getUserData } from "../../Actions/UserDetailsActions";
 import ProductsContext from "../ProductsContext";
 
-export default class ProductsListComponents extends Component {
+class ProductsListComponents extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,6 +25,7 @@ export default class ProductsListComponents extends Component {
     }
 
     componentDidMount () {
+        this.props.getUserData();
         const url = 'https://randomuser.me/api/?results=100';
         axios.get(url).then((res) => {
             console.log(res)
@@ -80,3 +82,9 @@ export default class ProductsListComponents extends Component {
         )
     }
 }
+const mapDispatchStateToProps = (dispatch) => {
+    return {
+        getUserData: (data) => dispatch(getUserData(data))
+    }
+}
+export default connect(null, mapDispatchStateToProps)(ProductsListComponents);
