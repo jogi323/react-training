@@ -19,7 +19,7 @@ axios.interceptors.request.use(
   (req) => {
     let token = "1345421"
     req.headers = { ...req.headers, Authorization: `Bearer ${token}` }
-    // console.log(req);
+    // consosle.log(req);
     return req;
   },
   (err) => {

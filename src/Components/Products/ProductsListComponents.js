@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 
 import ProductsTableComponent  from "./ProductsTableComponent";
 import SearchProductsComponent from "./SearchProductsComponent";
-
+import { getUserData } from "../../Actions/UserDetailsActions";
 import ProductsContext from "../ProductsContext";
-import { getUserData } from "../../Actions/UserDataAction";
+// import { getUserData } from "../../Actions/UserDataAction";
 
 class ProductsListComponents extends Component {
     constructor(props) {
@@ -38,10 +38,10 @@ class ProductsListComponents extends Component {
 
     componentDidMount () {
         this.props.getUserData();
-        // const url = 'https://randomuser.me/api/?results=100';
-        // axios.get(url).then((res) => {
-        //     console.log(res)
-        // });
+        const url = 'https://randomuser.me/api/?results=100';
+        axios.get(url).then((res) => {
+            console.log(res)
+        });
         //get data GET
         // axios.get("./JSON/products.json")
         //     .then((res) => console.log(res), (err) => {console.log(err)})

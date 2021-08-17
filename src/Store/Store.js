@@ -1,23 +1,27 @@
-import { createStore, applyMiddleware} from "redux";
-import rootReducer from "../Reducers/RootReducer";
-import thunkMiddleware from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { applyMiddleware, createStore } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const initialState = {};
+import rootReducer from '../Reducers/RootReducer';
 
-function loggerTest({getState}) {
-  return next => (action) => {
-    // console.log("Will update", action);
-    const returnValue = next(action);
-    // console.log(getState(), "state after update");
-    return returnValue;
+function logger({ getState }) {
+  return next => action => {
+    console.log('will dispatch', action)
+
+    // Call the next dispatch method in the middleware chain.
+    const returnValue = next(action)
+
+    console.log('state after dispatch', getState())
+
+    // This will likely be the action itself, unless
+    // a middleware further in chain changed it.
+    return returnValue
   }
 }
 
 export default function configureStore(preloadedState) {
-  const middleware = [thunkMiddleware, loggerTest];
-
-  const store = createStore(rootReducer, preloadedState, composeWithDevTools(applyMiddleware(...middleware)));
-  // console.log(store.getState());
+  const middlewares = [thunkMiddleware, logger];
+  const middlewareEnhancer = applyMiddleware(...middlewares);
+  const store = createStore(rootReducer, preloadedState, composeWithDevTools(middlewareEnhancer));
   return store;
 }
