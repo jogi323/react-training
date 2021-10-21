@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import axios from "axios";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 import ProductsTableComponent  from "./ProductsTableComponent";
 import SearchProductsComponent from "./SearchProductsComponent";
@@ -20,7 +20,18 @@ class ProductsListComponents extends Component {
                 {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
             ],
             searchText: "",
-            inStockOnly: false
+            inStockOnly: false,
+            userData: props.userData.data
+        }
+    }
+
+    static getDerivedStateFromProps = (nextProps, state) => {
+        // console.log(nextProps);
+        if (state.userData !== nextProps.userData) {
+            // console.log(nextProps.userData)
+            return {
+                userData: nextProps.userData.data
+            }
         }
     }
 
@@ -65,7 +76,8 @@ class ProductsListComponents extends Component {
         // this.props.clearUsers();
     }
     render() {
-        const { productsLit, searchText, inStockOnly } = this.state;
+        const { productsLit, searchText, inStockOnly, userData } = this.state;
+        // console.log(userData)
         return (
             <Fragment>
                 <div className="container col-6">
@@ -95,7 +107,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchStateToProps = (dispatch) => {
     return {
-        getUserData: (data) => dispatch(getUserData(data))
+        getUserData: () => dispatch(getUserData()),
     }
 }
 export default connect(mapStateToProps, {clearUsers, fetchUsers})(ProductsListComponents);

@@ -22,7 +22,6 @@ const reducer = (state, action) => {
 
 function HookChildComponent(props) {
     const data = useContext(ProductsContext);
-    console.log(data);
     const inputRef = useRef(null);
     const [state, dispatch] = useReducer(reducer, initialState);
     const setFocus = () => {
