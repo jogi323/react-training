@@ -6,7 +6,7 @@ import ProductsTableComponent  from "./ProductsTableComponent";
 import SearchProductsComponent from "./SearchProductsComponent";
 import { getUserData } from "../../Actions/UserDetailsActions";
 import ProductsContext from "../ProductsContext";
-
+import { fetchUsers, clearUsers } from './../../Reducers/UserDataSlice';
 class ProductsListComponents extends Component {
     constructor(props) {
         super(props);
@@ -25,11 +25,12 @@ class ProductsListComponents extends Component {
     }
 
     componentDidMount () {
-        this.props.getUserData();
-        const url = 'https://randomuser.me/api/?results=100';
-        axios.get(url).then((res) => {
-            console.log(res)
-        });
+        // this.props.getUserData();
+        // const url = 'https://randomuser.me/api/?results=100';
+        // axios.get(url).then((res) => {
+        //     console.log(res)
+        // });
+        this.props.fetchUsers();
         //get data GET
         // axios.get("./JSON/products.json")
         //     .then((res) => console.log(res), (err) => {console.log(err)})
@@ -60,6 +61,9 @@ class ProductsListComponents extends Component {
         //     searchText: text
         // })
     }
+    componentWillUnmount = () => {
+        // this.props.clearUsers();
+    }
     render() {
         const { productsLit, searchText, inStockOnly } = this.state;
         return (
@@ -82,9 +86,16 @@ class ProductsListComponents extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        usersList: state.CounterSlice.users
+    }
+}
 const mapDispatchStateToProps = (dispatch) => {
     return {
         getUserData: (data) => dispatch(getUserData(data))
     }
 }
-export default connect(null, mapDispatchStateToProps)(ProductsListComponents);
+export default connect(mapStateToProps, {clearUsers, fetchUsers})(ProductsListComponents);
